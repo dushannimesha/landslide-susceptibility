@@ -1,0 +1,48 @@
+# Landslide physics pipeline configuration (paths relative to project root ~/landlside)
+paths:
+  main_csv: data/Malaysia_50x50km_250m_Daily_2020_WithLithology.csv
+  params_csv: data/Malaysia_Unique_Grid_4_Geotech_Params.csv     # Ksat, c', n, phi' per cell
+  glc_csv: data/raw/Global_Landslide_Catalog_Export_rows.csv
+  glc_url: https://data.nasa.gov/docs/legacy/Global_Landslide_Catalog_Export/Global_Landslide_Catalog_Export_rows.csv
+  processed: data/processed
+  reports: reports
+  outputs: outputs
+
+bbox: [101.50, 2.95, 101.95, 3.40]     # minLon, minLat, maxLon, maxLat
+coord_round: 7                          # decimals used to join the two CSVs
+
+filters:
+  min_slope_deg: 5.0                    # infinite-slope model not meaningful on flat ground
+  water_lulc: [80]                      # ESA WorldCover permanent water
+  drop_lithology: [0]                   # GLiM water / no data
+  urban_lulc: [50]                      # kept, but flagged
+  burn_in_days: 30                      # antecedent windows incomplete at start of year
+
+labels:
+  max_location_accuracy_km: 1.0         # use "exact" and "1km" GLC events for training labels
+  positive_radius_m: 500                # cells within this radius of an event = positive
+  negative_buffer_m: 1500               # cells closer than this (but not positive) are excluded
+  rain_triggers: [rain, downpour, continuous_rain, monsoon, tropical_cyclone, flooding]
+
+physics:
+  soil_depth_m: 2.0                     # H, failure-plane depth (calibrated)
+  drainage_tau_days: 5.0                # recession of infiltrated water (calibrated)
+  psi_scale: 1.0                        # multiplier on Rawls wetting-front suction (calibrated)
+  k_sigmoid: 10.0                       # steepness of p = 1/(1+exp(k(FS-1)))
+  gamma_w: 9.81                         # kN/m3
+  min_delta_theta: 0.02
+  soil_moisture_col: SoilMoist_7_28cm
+
+calibration:
+  soil_depth_m: [1.0, 1.5, 2.0, 3.0, 4.0, 5.0]
+  drainage_tau_days: [2.0, 5.0, 10.0, 20.0]
+  psi_scale: [0.5, 1.0, 2.0]
+  n_blocks: 4                           # 4x4 spatial blocks for CV
+  min_informative_auc: 0.55             # below this, labels are not used to set the constants
+
+classes:                                # absolute classes on max p (physical failure probability)
+  edges: [0.2, 0.4, 0.6, 0.8]
+  names: [Very Low, Low, Moderate, High, Very High]
+  # relative susceptibility index = percentile rank of (-min FS) among all cells;
+  # class breaks at these percentiles (top 5 % = Very High)
+  relative_percentiles: [40, 70, 85, 95]

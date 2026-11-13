@@ -1,0 +1,10 @@
+# large inputs / regenerated data (GitHub limit 100 MB)
+data/
+*.csv.gz
+# regenerated daily series
+outputs/daily_*.npy
+outputs/dates.npy
+# keep outputs/maps, outputs/susceptibility_points.csv, reports/
+__pycache__/
+*.pyc
+.pytest_cache/

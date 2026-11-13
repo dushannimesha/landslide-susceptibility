@@ -1,0 +1,31 @@
+{
+  "n_cells": 16969,
+  "relative_class_counts": {
+    "Very Low": 6787,
+    "Low": 5091,
+    "Moderate": 2545,
+    "High": 1697,
+    "Very High": 849
+  },
+  "absolute_class_counts": {
+    "Very Low": 16969,
+    "Low": 0,
+    "Moderate": 0,
+    "High": 0,
+    "Very High": 0
+  },
+  "FS_min_quantiles": {
+    "0.0": 1.725,
+    "0.05": 2.546,
+    "0.5": 4.676,
+    "0.95": 9.581,
+    "1.0": 11.476
+  },
+  "frac_cells_FS_lt_1_any_day": 0.0,
+  "frac_cells_FS_lt_1_dry_start": 0.0,
+  "median_FS_drop_dry_to_min": 0.26486778259277344,
+  "corr_FS_vs_AntRain30_daily_mean": -0.6709526360598654,
+  "mean_FS_on_dry_cell_days": 5.456603050231934,
+  "mean_FS_on_10_wettest_days": 5.312785625457764,
+  "params_in_physical_range": 1.0
+}

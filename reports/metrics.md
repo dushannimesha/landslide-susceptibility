@@ -1,0 +1,13 @@
+# Model comparison (spatial-block CV)
+
+| model | ROC-AUC | PR-AUC | mean fold AUC | hit@0.5 | false alarm@0.5 |
+|---|---|---|---|---|---|
+| physics_p | 0.393 | 0.005 | 0.418 | 0.000 | 0.000 |
+| physics_minFS | 0.393 | 0.005 | 0.419 | 0.000 | 0.000 |
+| slope_only | 0.372 | 0.005 | 0.396 | 1.000 | 1.000 |
+| random_forest | 0.700 | 0.012 | 0.740 | 0.000 | 0.007 |
+| xgboost | 0.682 | 0.017 | 0.750 | 0.095 | 0.015 |
+
+Positives: 105, negatives: 16288
+
+Labels = GLC 2007-2017 event locations (spatial inventory); physics forced by 2020 daily data. F1/hit/false-alarm thresholds are only meaningful for probability outputs (physics_p, RF, XGB).

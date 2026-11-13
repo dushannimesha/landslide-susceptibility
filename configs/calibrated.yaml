@@ -1,0 +1,19 @@
+physics:
+  soil_depth_m: 2.0
+  drainage_tau_days: 5.0
+  psi_scale: 1.0
+  k_sigmoid: 10.0
+  gamma_w: 9.81
+  min_delta_theta: 0.02
+  soil_moisture_col: SoilMoist_7_28cm
+calibration_result:
+  auc_cv_mean: 0.462584437293234
+  auc_all: 0.44024347460005614
+  nested_cv_auc: 0.4381547509702456
+  labels_informative: false
+  best_grid_point:
+    soil_depth_m: 1.0
+    drainage_tau_days: 5.0
+    psi_scale: 2.0
+  note: 'Best CV AUC below threshold: GLC inventory not informative for the physics
+    constants (reporting bias toward urban cut slopes). Literature defaults kept.'
